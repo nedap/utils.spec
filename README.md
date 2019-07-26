@@ -1,0 +1,29 @@
+# nedap.utils.spec [![CircleCI](https://circleci.com/gh/nedap/utils.spec.svg?style=svg&circle-token=5895f9f338cb751d2c2e8a24844d82e21228190e)](https://circleci.com/gh/nedap/utils.spec)
+
+Utilities for [clojure.spec](https://github.com/clojure/spec.alpha).
+
+## Installation
+
+#### Coordinates
+
+```clojure
+[com.nedap.staffing-solutions/utils.spec "1.0.0-alpha2"]
+```
+
+> Note that self-hosted ClojureScript (e.g. Lumo) is unsupported at the moment.
+
+#### Production setup
+
+* In JVM Clojure, set [`*assert*`](https://github.com/technomancy/leiningen/blob/9981ae9086a352caf13a42bff4a7e43faa850452/sample.project.clj#L286) to `false`.
+
+* In ClojureScript, set [`:elide-asserts`](https://clojurescript.org/reference/compiler-options#elide-asserts) to `true`.
+
+## Documentation
+
+Please browse the public namespaces, which are documented, speced and tested.
+
+## License
+
+Copyright © Nedap
+
+This program and the accompanying materials are made available under the terms of the Eclipse Public License 2.0 which is available at http://www.eclipse.org/legal/epl-2.0.
