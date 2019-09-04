@@ -18,6 +18,12 @@ Utilities for [clojure.spec](https://github.com/clojure/spec.alpha).
 
 * In ClojureScript, set [`:elide-asserts`](https://clojurescript.org/reference/compiler-options#elide-asserts) to `true`.
 
+### Running the tests
+
+```bash
+lein with-profile -dev,+test do clean, cljsbuild once test && clear && node target/out/tests.js
+```
+
 ## Documentation
 
 Please browse the public namespaces, which are documented, speced and tested.
