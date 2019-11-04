@@ -1,0 +1,63 @@
+-- Spec failed --------------------
+
+  nil
+
+evaluated from
+
+  %
+
+should satisfy
+
+  string?
+
+evaluated from
+
+  string?
+
+-------------------------
+Detected 1 error
+
+{:explanation nil - failed: string?
+, :spec string?, :faulty-value %}
+-- Spec failed --------------------
+
+  :not-an-int
+
+evaluated from
+
+  x
+
+should satisfy
+
+  int?
+
+evaluated from
+
+  int?
+
+-------------------------
+Detected 1 error
+
+{:explanation :not-an-int - failed: int?
+, :spec int?, :faulty-value x}
+-- Spec failed --------------------
+
+  :not-a-boolean
+
+evaluated from
+
+  y
+
+should satisfy
+
+  boolean?
+
+evaluated from
+
+  boolean?
+
+-------------------------
+Detected 1 error
+
+{:explanation :not-a-boolean - failed: boolean?
+, :spec boolean?, :faulty-value y}
