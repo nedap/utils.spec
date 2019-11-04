@@ -6,9 +6,20 @@
 
 (def ^:dynamic *cljs?* false)
 
+(defn throw-validation-error [data]
+  (throw (ex-info "Validation failed" data)))
+
+#?(:clj
+   (defmacro warn
+     [data]
+     `(binding [*out* nedap.utils.spec.api/*warn*]
+        (println ~data))))
+
 #?(:clj
    (defmacro check!
-     [& args]
+     {:style/indent 1}
+     [throw? & args]
+     {:pre [(boolean? throw?)]}
      (let [cljs (-> &env :ns some?)
            valid (if cljs
                    'cljs.spec.alpha/valid?
@@ -35,7 +46,9 @@
                                                                                  (pr-str spec-quoted#)
                                                                                  "\n\n-------------------------"))
                     true                      println)
-                  (throw (ex-info "Validation failed" {:spec         spec-quoted#
-                                                       :faulty-value x-quoted#
-                                                       :explanation  (~explain spec# x#)})))))
+                  (~(if throw?
+                      `throw-validation-error
+                      `warn) {:spec         spec-quoted#
+                              :faulty-value x-quoted#
+                              :explanation  (~explain spec# x#)}))))
           true))))
