@@ -1,5 +1,5 @@
 ;; Please don't bump the library version by hand - use ci.release-workflow instead.
-(defproject com.nedap.staffing-solutions/utils.spec "2.0.0-alpha2"
+(defproject com.nedap.staffing-solutions/utils.spec "2.0.0-alpha3"
   ;; Please keep the dependencies sorted a-z.
   :dependencies [[expound "0.7.2"]
                  [org.clojure/clojure "1.10.1"]
