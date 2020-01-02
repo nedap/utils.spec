@@ -35,7 +35,11 @@
                                                                                  (pr-str spec-quoted#)
                                                                                  "\n\n-------------------------"))
                     true                      println)
-                  (throw (ex-info "Validation failed" {:spec         spec-quoted#
-                                                       :faulty-value x-quoted#
-                                                       :explanation  (~explain spec# x#)})))))
+                  (let [should-print-literally?# (keyword? spec#)]
+                    (throw (ex-info "Validation failed" (cond-> {:spec         (if should-print-literally?#
+                                                                                 spec#
+                                                                                 spec-quoted#)
+                                                                 :faulty-value x-quoted#
+                                                                 :explanation  (~explain spec# x#)}
+                                                          should-print-literally?# (assoc :spec-quoted spec-quoted#))))))))
           true))))
