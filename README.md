@@ -7,7 +7,7 @@ Utilities for [clojure.spec](https://github.com/clojure/spec.alpha).
 #### Coordinates
 
 ```clojure
-[com.nedap.staffing-solutions/utils.spec "1.1.0"]
+[com.nedap.staffing-solutions/utils.spec "1.2.0-alpha1"]
 ```
 
 > Note that self-hosted ClojureScript (e.g. Lumo) is unsupported at the moment.
@@ -25,4 +25,5 @@ Please browse the public namespaces, which are documented, speced and tested.
 ## License
 
 Copyright © Nedap
+
 This program and the accompanying materials are made available under the terms of the [Eclipse Public License 2.0](https://www.eclipse.org/legal/epl-2.0)

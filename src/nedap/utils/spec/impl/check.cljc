@@ -35,7 +35,14 @@
                                                                                  (pr-str spec-quoted#)
                                                                                  "\n\n-------------------------"))
                     true                      println)
-                  (throw (ex-info "Validation failed" {:spec         spec-quoted#
-                                                       :faulty-value x-quoted#
-                                                       :explanation  (~explain spec# x#)})))))
+                  (throw (ex-info "Validation failed"
+                                  ;; :spec and :faulty-value are legacy keys without strong associated semantics.
+                                  ;; However programs may depend strongly on them. Please don't remove them.
+                                  {:spec                spec-quoted#
+                                   :spec-object         spec#
+                                   :quoted-spec         spec-quoted#
+                                   :faulty-value        x-quoted#
+                                   :faulty-value-object x#
+                                   :quoted-faulty-value x-quoted#
+                                   :explanation         (~explain spec# x#)})))))
           true))))
