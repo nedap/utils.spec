@@ -1,10 +1,13 @@
 (ns nedap.utils.spec.impl.check
   (:require
    #?(:clj [clojure.spec.alpha :as spec] :cljs [cljs.spec.alpha :as spec])
+   #?(:clj [clojure.stacktrace])
    [expound.alpha :as expound])
   #?(:cljs (:require-macros [nedap.utils.spec.impl.check])))
 
-(def ^:dynamic *cljs?* false)
+(def ^:dynamic *print-stack-frames*
+  "numbers of stack frames to print before raising the exception"
+  0)
 
 #?(:clj
    (defmacro check!
@@ -35,7 +38,7 @@
                                                                                  (pr-str spec-quoted#)
                                                                                  "\n\n-------------------------"))
                     true                      println)
-                  (throw (ex-info "Validation failed"
+                  (let [ex# (ex-info "Validation failed"
                                   ;; :spec and :faulty-value are legacy keys without strong associated semantics.
                                   ;; However programs may depend strongly on them. Please don't remove them.
                                   {:spec                spec-quoted#
@@ -44,5 +47,9 @@
                                    :faulty-value        x-quoted#
                                    :faulty-value-object x#
                                    :quoted-faulty-value x-quoted#
-                                   :explanation         (~explain spec# x#)})))))
+                                   :explanation         (~explain spec# x#)})]
+                    (when (and (not ~cljs)
+                               (pos-int? *print-stack-frames*))
+                       (clojure.stacktrace/print-stack-trace ex# *print-stack-frames*))
+                    (throw ex#)))))
           true))))
