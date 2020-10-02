@@ -5,9 +5,13 @@
    [expound.alpha :as expound])
   #?(:cljs (:require-macros [nedap.utils.spec.impl.check])))
 
-(def ^:dynamic *print-stack-frames*
-  "numbers of stack frames to print before raising the exception"
-  0)
+(defn print-stack-frames
+  "numbers of stack frames to print before raising the exception
+
+  note: only available in clj"
+  []
+  #?(:cljs 0
+     :clj (Long/parseLong (System/getProperty "nedap.utils.spec.print-stack-frames" "0"))))
 
 #?(:clj
    (defmacro check!
@@ -39,17 +43,17 @@
                                                                                  "\n\n-------------------------"))
                     true                      println)
                   (let [ex# (ex-info "Validation failed"
-                                  ;; :spec and :faulty-value are legacy keys without strong associated semantics.
-                                  ;; However programs may depend strongly on them. Please don't remove them.
-                                  {:spec                spec-quoted#
-                                   :spec-object         spec#
-                                   :quoted-spec         spec-quoted#
-                                   :faulty-value        x-quoted#
-                                   :faulty-value-object x#
-                                   :quoted-faulty-value x-quoted#
-                                   :explanation         (~explain spec# x#)})]
+                                     ;; :spec and :faulty-value are legacy keys without strong associated semantics.
+                                     ;; However programs may depend strongly on them. Please don't remove them.
+                                     {:spec                spec-quoted#
+                                      :spec-object         spec#
+                                      :quoted-spec         spec-quoted#
+                                      :faulty-value        x-quoted#
+                                      :faulty-value-object x#
+                                      :quoted-faulty-value x-quoted#
+                                      :explanation         (~explain spec# x#)})]
                     (when (and (not ~cljs)
-                               (pos-int? *print-stack-frames*))
-                       (clojure.stacktrace/print-stack-trace ex# *print-stack-frames*))
+                               (pos? (print-stack-frames)))
+                      (clojure.stacktrace/print-stack-trace ex# (print-stack-frames)))
                     (throw ex#)))))
           true))))
