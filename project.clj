@@ -1,5 +1,5 @@
 ;; Please don't bump the library version by hand - use ci.release-workflow instead.
-(defproject com.nedap.staffing-solutions/utils.spec "1.2.0"
+(defproject com.nedap.staffing-solutions/utils.spec "1.3.0-alpha1"
   ;; Please keep the dependencies sorted a-z.
   :dependencies [[expound "0.8.4"]
                  [org.clojure/clojure "1.10.1"]
@@ -72,10 +72,7 @@
                         :source-paths ["dev"]
                         :repl-options {:init-ns dev}}
 
-             :provided {:dependencies [[org.clojure/clojurescript "1.10.597"
-                                        :exclusions [com.cognitect/transit-clj
-                                                     com.google.code.findbugs/jsr305
-                                                     com.google.errorprone/error_prone_annotations]]
+             :provided {:dependencies [[org.clojure/clojurescript "1.10.597"]
                                        [com.google.guava/guava "25.1-jre" #_"transitive"]
                                        [com.google.protobuf/protobuf-java "3.4.0" #_"transitive"]
                                        [com.cognitect/transit-clj "0.8.313" #_"transitive"]
