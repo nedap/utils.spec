@@ -7,9 +7,6 @@
    [clojure.test :refer [run-all-tests run-tests]]
    [clojure.tools.namespace.repl :refer [clear refresh refresh-dirs set-refresh-dirs]]
    [criterium.core :refer [quick-bench]]
-   [formatting-stack.branch-formatter :refer [format-and-lint-branch! lint-branch!]]
-   [formatting-stack.compilers.test-runner :refer [test!]]
-   [formatting-stack.project-formatter :refer [format-and-lint-project! lint-project!]]
    [lambdaisland.deep-diff]))
 
 (set-refresh-dirs "src" "test" "dev")
@@ -31,8 +28,17 @@
       (lambdaisland.deep-diff/diff y)
       (lambdaisland.deep-diff/pretty-print)))
 
-(defn gt
-  "gt stands for git tests"
-  []
+(defn format-and-lint-branch! [& {:keys [branch in-background?]
+                                  :or   {branch         "main"
+                                         in-background? false}}]
   (refresh)
-  (test!))
+  ((requiring-resolve 'formatting-stack.branch-formatter/format-and-lint-branch!)
+   :target-branch  branch
+   :in-background? in-background?))
+
+(defn format-and-lint-project!
+  "Formats the whole project."
+  [& {:keys [in-background?]
+      :or   {in-background? false}}]
+  (refresh)
+  ((requiring-resolve 'formatting-stack.project-formatter/format-and-lint-project!) :in-background? in-background?))

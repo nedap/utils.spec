@@ -66,7 +66,7 @@
                                        [com.stuartsierra/component "0.4.0"]
                                        [com.taoensso/timbre "4.10.0"]
                                        [criterium "0.4.5"]
-                                       [formatting-stack "1.0.1"]
+                                       [formatting-stack "4.6.0"]
                                        [lambdaisland/deep-diff "0.0-29"]
                                        [medley "1.3.0"]
                                        [org.clojure/core.async "0.5.527"]
@@ -77,27 +77,22 @@
                         :source-paths ["dev"]
                         :repl-options {:init-ns dev}}
 
-             :provided {:dependencies [[org.clojure/clojurescript "1.10.597"]
-                                       [com.google.guava/guava "25.1-jre" #_"transitive"]
-                                       [com.google.protobuf/protobuf-java "3.4.0" #_"transitive"]
-                                       [com.cognitect/transit-clj "0.8.313" #_"transitive"]
-                                       [com.google.errorprone/error_prone_annotations "2.1.3" #_"transitive"]
-                                       [com.google.code.findbugs/jsr305 "3.0.2" #_"transitive"]]}
+             :provided {:dependencies [[org.clojure/clojurescript "1.10.597"]]}
 
              :check    {:global-vars {*unchecked-math* :warn-on-boxed
                                       ;; avoid warnings that cannot affect production:
                                       *assert*         false}}
 
-             :test     {:dependencies [[com.nedap.staffing-solutions/utils.test "1.6.1"]]
+             :test     {:dependencies [[com.nedap.staffing-solutions/utils.test "1.9.0"]]
                         :jvm-opts     ["-Dclojure.core.async.go-checking=true"
                                        "-Duser.language=en-US"]}
 
-             :ncrw       {:global-vars  {*assert* true} ;; `ci.release-workflow` relies on runtime assertions
-                          :source-paths   ^:replace []
-                          :test-paths     ^:replace []
-                          :resource-paths ^:replace []
-                          :plugins        ^:replace []
-                          :dependencies   ^:replace [[com.nedap.staffing-solutions/ci.release-workflow "1.14.1"]]}
+             :ncrw     {:global-vars    {*assert* true} ;; `ci.release-workflow` relies on runtime assertions
+                        :source-paths   ^:replace []
+                        :test-paths     ^:replace []
+                        :resource-paths ^:replace []
+                        :plugins        ^:replace []
+                        :dependencies   ^:replace [[com.nedap.staffing-solutions/ci.release-workflow "1.14.1"]]}
 
-             :ci         {:pedantic?    :abort
-                          :jvm-opts     ["-Dclojure.main.report=stderr"]}})
+             :ci       {:pedantic? :abort
+                        :jvm-opts  ["-Dclojure.main.report=stderr"]}})
