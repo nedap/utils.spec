@@ -2,7 +2,8 @@
   (:require
    #?(:clj [clojure.spec.alpha :as spec] :cljs [cljs.spec.alpha :as spec])
    #?(:clj [clojure.stacktrace])
-   [expound.alpha :as expound])
+   [expound.alpha :as expound]
+   [taoensso.timbre :as timbre])
   #?(:cljs (:require-macros [nedap.utils.spec.impl.check])))
 
 (defn print-stack-frames
@@ -32,7 +33,7 @@
                                                            (partition 2 args))]
             (or (~valid spec# x#)
                 (do
-                  (cond-> (expound.alpha/expound-str spec# x#)
+                  (cond-> (expound/expound-str spec# x#)
                     (not= x# x-quoted#)       (clojure.string/replace-first "should satisfy"
                                                                             (str "evaluated from\n\n  "
                                                                                  (pr-str x-quoted#)
@@ -41,7 +42,7 @@
                                                                             (str "evaluated from\n\n  "
                                                                                  (pr-str spec-quoted#)
                                                                                  "\n\n-------------------------"))
-                    true                      println)
+                    true                      (timbre/warn))
                   (let [ex# (ex-info "Validation failed"
                                      ;; :spec and :faulty-value are legacy keys without strong associated semantics.
                                      ;; However programs may depend strongly on them. Please don't remove them.
@@ -54,6 +55,6 @@
                                       :explanation         (~explain spec# x#)})]
                     (when (and (not ~cljs)
                                (pos? (print-stack-frames)))
-                      (clojure.stacktrace/print-stack-trace ex# (print-stack-frames)))
+                      (timbre/warn (with-out-str (clojure.stacktrace/print-stack-trace ex# (print-stack-frames)))))
                     (throw ex#)))))
           true))))
