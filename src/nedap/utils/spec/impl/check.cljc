@@ -2,6 +2,7 @@
   (:require
    #?(:clj [clojure.spec.alpha :as spec] :cljs [cljs.spec.alpha :as spec])
    #?(:clj [clojure.stacktrace])
+   [clojure.string :as str]
    [expound.alpha :as expound]
    [taoensso.timbre :as timbre])
   #?(:cljs (:require-macros [nedap.utils.spec.impl.check])))
@@ -34,14 +35,14 @@
             (or (~valid spec# x#)
                 (do
                   (cond-> (expound/expound-str spec# x#)
-                    (not= x# x-quoted#)       (clojure.string/replace-first "should satisfy"
-                                                                            (str "evaluated from\n\n  "
-                                                                                 (pr-str x-quoted#)
-                                                                                 "\n\nshould satisfy"))
-                    (not= spec# spec-quoted#) (clojure.string/replace-first "-------------------------"
-                                                                            (str "evaluated from\n\n  "
-                                                                                 (pr-str spec-quoted#)
-                                                                                 "\n\n-------------------------"))
+                    (not= x# x-quoted#)       (str/replace-first "should satisfy"
+                                                                 (str "evaluated from\n\n  "
+                                                                      (pr-str x-quoted#)
+                                                                      "\n\nshould satisfy"))
+                    (not= spec# spec-quoted#) (str/replace-first "-------------------------"
+                                                                 (str "evaluated from\n\n  "
+                                                                      (pr-str spec-quoted#)
+                                                                      "\n\n-------------------------"))
                     true                      (timbre/warn))
                   (let [ex# (ex-info "Validation failed"
                                      ;; :spec and :faulty-value are legacy keys without strong associated semantics.
