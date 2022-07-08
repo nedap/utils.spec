@@ -2,9 +2,18 @@
 (defproject com.nedap.staffing-solutions/utils.spec "1.3.1"
   ;; Please keep the dependencies sorted a-z.
   :dependencies [[expound "0.8.4"]
-                 [org.clojure/clojure "1.10.1"]
-                 [org.clojure/spec.alpha "0.2.176"]
+                 [org.clojure/clojure "1.10.3"]
+                 [org.clojure/spec.alpha "0.2.194"]
                  [spec-coerce "1.0.0-alpha9"]]
+
+  :managed-dependencies [[com.cognitect/transit-clj "1.0.324"]
+                         [com.fasterxml.jackson.core/jackson-core "2.12.4"]
+                         [com.google.code.findbugs/jsr305 "3.0.2"]
+                         [com.google.errorprone/error_prone_annotations "2.1.3"]
+                         [org.clojure/core.rrb-vector "0.1.2"]
+                         [org.clojure/tools.reader "1.3.6"]]
+
+  :exclusions [com.nedap.staffing-solutions/utils.spec]
 
   :description "clojure.spec utilities"
 
@@ -59,11 +68,11 @@
                                        [criterium "0.4.5"]
                                        [formatting-stack "1.0.1"]
                                        [lambdaisland/deep-diff "0.0-29"]
-                                       [medley "1.2.0"]
+                                       [medley "1.3.0"]
                                        [org.clojure/core.async "0.5.527"]
                                        [org.clojure/math.combinatorics "0.1.1"]
                                        [org.clojure/test.check "0.10.0-alpha3"]
-                                       [org.clojure/tools.namespace "0.3.1"]]
+                                       [org.clojure/tools.namespace "1.2.0"]]
                         :plugins      [[lein-cloverage "1.1.1"]]
                         :source-paths ["dev"]
                         :repl-options {:init-ns dev}}
