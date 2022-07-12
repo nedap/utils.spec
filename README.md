@@ -22,8 +22,14 @@ Utilities for [clojure.spec](https://github.com/clojure/spec.alpha).
 
 Please browse the public namespaces, which are documented, speced and tested.
 
-In cases where a `check!` spec-failure is printed, but the stacktrace is swallowed, one can debug the origin by setting the java property `nedap.utils.spec.print-stack-frames` to a positive number to print that amount of stackframes before the exception is raised. 
-It's generally recommended not to swallow these exceptions in dev/test environments.
+In case of a failure the `check!` macro will print an explanation and throw an exception. It's recommended not to swallow 
+these exceptions and rely on exception reporting to discover failures.
+
+It's possible to modify the spec-failure printing by setting `nedap.utils.spec.print-symbol` to any fully qualified symbol.
+
+In cases where a `check!` spec-failure is printed, but the stacktrace is swallowed, one can debug the origin by setting 
+the java property `nedap.utils.spec.print-stack-frames` to a positive number to print that amount of stackframes before 
+the exception is raised.
 
 ## License
 

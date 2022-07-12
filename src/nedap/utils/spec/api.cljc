@@ -9,6 +9,8 @@
    (defmacro check!
      "Asserts validity, explaining the cause otherwise. Apt for :pre conditions.
 
+     Reporting can be controlled by setting `nedap.utils.spec.print-symbol`.
+
   `args` is a sequence of spec-val pairs."
      [& args]
      {:pre [(-> args count even?)]}
