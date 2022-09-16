@@ -1,8 +1,7 @@
 (ns nedap.utils.spec.api
   (:require
    #?(:clj [clojure.spec.alpha :as spec] :cljs [cljs.spec.alpha :as spec])
-   [nedap.utils.spec.impl.check]
-   [spec-coerce.core :as coerce])
+   [nedap.utils.spec.impl.check])
   #?(:cljs (:require-macros [nedap.utils.spec.api :refer [check!]])))
 
 #?(:clj
@@ -26,6 +25,6 @@
   ;; Else spec-coerce will fail to coerce things.
   {:pre [(check! qualified-ident? spec
                  map?             m)]}
-  (let [m (coerce/coerce spec m)]
+  (let [m ((requiring-resolve 'spec-coerce.core/coerce) spec m)]
     (cond-> m
       (not (spec/valid? spec m)) (assoc ::invalid? true))))

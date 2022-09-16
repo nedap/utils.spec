@@ -3,8 +3,7 @@
   ;; Please keep the dependencies sorted a-z.
   :dependencies [[expound "0.8.4"]
                  [org.clojure/clojure "1.10.3"]
-                 [org.clojure/spec.alpha "0.2.194"]
-                 [spec-coerce "1.0.0-alpha9"]]
+                 [org.clojure/spec.alpha "0.2.194"]]
 
   :managed-dependencies [[com.cognitect/transit-clj "1.0.324"]
                          [com.fasterxml.jackson.core/jackson-core "2.12.4"]
@@ -77,7 +76,8 @@
                         :source-paths ["dev"]
                         :repl-options {:init-ns dev}}
 
-             :provided {:dependencies [[org.clojure/clojurescript "1.10.597"]]}
+             :provided {:dependencies [[org.clojure/clojurescript "1.10.597"]
+                                       [spec-coerce "1.0.0-alpha9"]]}
 
              :check    {:global-vars {*unchecked-math* :warn-on-boxed
                                       ;; avoid warnings that cannot affect production:
