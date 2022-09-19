@@ -3,6 +3,7 @@
    #?(:clj [clojure.spec.alpha :as spec] :cljs [cljs.spec.alpha :as spec])
    #?(:clj [clojure.string :as str])
    #?(:clj [clojure.test :refer [deftest testing are is use-fixtures]] :cljs [cljs.test :refer-macros [deftest testing is are] :refer [use-fixtures]])
+   [spec-coerce.core]
    [nedap.utils.spec.api :as sut]))
 
 (def validation-failed #"Validation failed")

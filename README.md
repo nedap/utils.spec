@@ -4,7 +4,7 @@ Utilities for [clojure.spec](https://github.com/clojure/spec.alpha).
 
 ## Installation
 
-Make sure `[spec-coerce "1.0.0-alpha9"]` (or similar) is present on the classpath if you want to use `nedap.util.spec.api/coerce-map-indicating-invalidity`. 
+Make sure `[spec-coerce "1.0.0-alpha9"]` (or similar) is present on the classpath and loaded if you want to use `nedap.util.spec.api/coerce-map-indicating-invalidity`. 
 
 #### Coordinates
 
