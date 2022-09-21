@@ -9,7 +9,7 @@ Make sure `[spec-coerce "1.0.0-alpha9"]` (or similar) is present on the classpat
 #### Coordinates
 
 ```clojure
-[com.nedap.staffing-solutions/utils.spec "1.5.0-alpha1"]
+[com.nedap.staffing-solutions/utils.spec "1.5.0"]
 ```
 
 > Note that self-hosted ClojureScript (e.g. Lumo) is unsupported at the moment.
