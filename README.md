@@ -4,10 +4,12 @@ Utilities for [clojure.spec](https://github.com/clojure/spec.alpha).
 
 ## Installation
 
+Make sure `[spec-coerce "1.0.0-alpha9"]` (or similar) is present on the classpath and loaded if you want to use `nedap.util.spec.api/coerce-map-indicating-invalidity`. 
+
 #### Coordinates
 
 ```clojure
-[com.nedap.staffing-solutions/utils.spec "1.4.0"]
+[com.nedap.staffing-solutions/utils.spec "1.5.0-alpha1"]
 ```
 
 > Note that self-hosted ClojureScript (e.g. Lumo) is unsupported at the moment.

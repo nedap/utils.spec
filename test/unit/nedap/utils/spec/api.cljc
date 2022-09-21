@@ -3,6 +3,7 @@
    #?(:clj [clojure.spec.alpha :as spec] :cljs [cljs.spec.alpha :as spec])
    #?(:clj [clojure.string :as str])
    #?(:clj [clojure.test :refer [deftest testing are is use-fixtures]] :cljs [cljs.test :refer-macros [deftest testing is are] :refer [use-fixtures]])
+   [spec-coerce.core]
    [nedap.utils.spec.api :as sut]))
 
 (def validation-failed #"Validation failed")
@@ -33,9 +34,9 @@
                                      (str/split #"\n at ") ;; first stacktrace starts with ' at '
                                      (nth 1 "")
                                      (str/split-lines)))
-         2 ["unit.nedap.utils.spec.api$speced_f.invokeStatic (api.cljc:11)"
-            "    unit.nedap.utils.spec.api$speced_f.invoke (api.cljc:10)"]
-         1 ["unit.nedap.utils.spec.api$speced_f.invokeStatic (api.cljc:11)"]
+         2 ["unit.nedap.utils.spec.api$speced_f.invokeStatic (api.cljc:12)"
+            "    unit.nedap.utils.spec.api$speced_f.invoke (api.cljc:11)"]
+         1 ["unit.nedap.utils.spec.api$speced_f.invokeStatic (api.cljc:12)"]
          0 [""]))))
 
 (spec/def ::age int?)
