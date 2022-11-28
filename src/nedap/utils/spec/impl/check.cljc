@@ -30,6 +30,7 @@
            explain  (if cljs
                       'cljs.spec.alpha/explain-str
                       'clojure.spec.alpha/explain-str)
+           ex       (gensym "exception__")
            do-print (print-symbol)]
        `(do
           (doseq [[spec# x# spec-quoted# x-quoted#] ~(mapv (fn [[a b]]
@@ -49,7 +50,7 @@
                                                                         (pr-str spec-quoted#)
                                                                         "\n\n-------------------------"))
                       true                      (~do-print))
-              (let [ex# (ex-info "Validation failed"
+              (let [~ex (ex-info "Validation failed"
                                  ;; :spec and :faulty-value are legacy keys without strong associated semantics.
                                  ;; However, programs may depend strongly on them. Please don't remove them.
                                  {:spec                spec-quoted#
@@ -59,8 +60,9 @@
                                   :faulty-value-object x#
                                   :quoted-faulty-value x-quoted#
                                   :explanation         (~explain spec# x#)})]
-                (when (and (not ~cljs)
-                           (pos? (print-stack-frames)))
-                  (~do-print (with-out-str (print-stack-trace ex# (print-stack-frames)))))
-                (throw ex#))))
+                ~(when-not cljs
+                   `(when (pos? (print-stack-frames))
+                      "hoi"
+                      (~do-print (with-out-str (print-stack-trace ~ex (print-stack-frames))))))
+                (throw ~ex))))
           true))))
