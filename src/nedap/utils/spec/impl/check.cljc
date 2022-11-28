@@ -62,7 +62,6 @@
                                   :explanation         (~explain spec# x#)})]
                 ~(when-not cljs
                    `(when (pos? (print-stack-frames))
-                      "hoi"
                       (~do-print (with-out-str (print-stack-trace ~ex (print-stack-frames))))))
                 (throw ~ex))))
           true))))
