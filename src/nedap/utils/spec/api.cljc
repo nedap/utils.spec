@@ -2,7 +2,7 @@
   (:require
    #?(:clj [clojure.spec.alpha :as spec] :cljs [cljs.spec.alpha :as spec])
    [nedap.utils.spec.impl.check]
-   [nedap.utils.spec.impl.spec-coerce :refer [when-spec-coerce-available?]])
+   #?(:clj [nedap.utils.spec.impl.spec-coerce :refer [when-spec-coerce-available?]]))
   #?(:cljs (:require-macros [nedap.utils.spec.api :refer [check!]]
                             [nedap.utils.spec.impl.spec-coerce :refer [when-spec-coerce-available?]])))
 
